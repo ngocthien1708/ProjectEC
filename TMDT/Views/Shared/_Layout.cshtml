@@ -15,11 +15,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="~/assets/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/assets/Client/css/banner.css" rel="stylesheet" />
     @RenderSection("css", required: false)
 </head>
 <body>
     <div class="row">
-        <div id="ad-Left" class="col-lg-2"></div>
+        <div id="ad-Left" class="col-lg-2">
+            <div id="left_ads_float">
+                <a href="https://facebook.com/namlaem1010" target="_blank"><img border="0" src="~/assets/Client/images/delivery-img1.jpg" width="235" height="435" /></a>
+            </div>
+        </div>
         <div class="wrap col-lg-8">
             <div class="header">
                 <div class="headertop_desc">
@@ -58,7 +63,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 @RenderBody()
             </div>
         </div>
-        <div id="ad-right" class="col-lg-2"></div>
+        <div id="ad-right" class="col-lg-2">
+            <div id="right_ads_float">
+                <a href="https://facebook.com/namlaem1010" target="_blank"><img border="0" src="~/assets/Client/images/delivery-img1.jpg" width="235" height="435" /></a>
+            </div>
+        </div>
     </div>
     @{ Html.RenderAction("AdLeftRight", "Home");}
     <div class="footer">
@@ -71,6 +80,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/assets/Client/js/move-top.js"></script>
     <script type="text/javascript" src="~/assets/Client/js/easing.js"></script>
+    <script src="~/assets/Client/js/banner.js"></script>
     <script type="text/javascript">
         function DropDown(el) {
             this.dd = el;

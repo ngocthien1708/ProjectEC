@@ -188,8 +188,10 @@
     <Content Include="assets\Admin\css\sb-admin-2.min.css" />
     <Content Include="assets\Admin\img\undraw_posting_photo.svg" />
     <Content Include="assets\Admin\jsController\Admin-User.js" />
+    <Content Include="assets\Client\css\banner.css" />
     <Content Include="assets\Client\images\AdSlide.jpg" />
     <Content Include="assets\Client\images\AdSlide2.jpg" />
+    <Content Include="assets\Client\js\banner.js" />
     <Content Include="Data\Advertisment\AdSlide.jpg" />
     <Content Include="Data\Advertisment\AdSlide2.jpg" />
     <Content Include="Data\Advertisment\AdSlide4.jpg" />
