@@ -1,0 +1,13 @@
+﻿#left_ads_float {
+    bottom: 50px;
+    top: 235px;
+    left: 10px;
+    position: fixed;
+}
+
+#right_ads_float {
+    bottom: 50px;
+    top: 235px;
+    right: 10px;
+    position: fixed;
+}
