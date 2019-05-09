@@ -1,0 +1,31 @@
+﻿@model List<Model.EF.advertisement>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        if (item.Location.Equals("LEFTAD"))
+        {
+            <div id="divQCLeft" style="display: none; position: absolute; top: 0px">
+                <a href="@item.Link"><img src="@item.Image" alt="@item.Content" width="235" height="460" /></a>
+            </div>
+        }
+        else
+        {
+            <div id="divQCRight" style="display: none; position: absolute; top: 0px">
+                <a href="@item.Link"><img src="@item.Image" alt="@item.Content" width="235" height="460" /></a>
+            </div>
+        }
+    }
+}
+else
+{
+    <div id="divQCRight" style="display: none; position: absolute; top: 0px">
+        <a href="#"><img src="~/assets/Client/images/slide-1-image.png" width="235" height="450" /></a>
+    </div>
+    <div id="divQCLeft" style="display: none; position: absolute; top: 0px">
+        <a href="#"><img src="~/assets/Client/images/slide-1-image.png" width="235" height="450" /></a>
+    </div>
+}
+
+
+

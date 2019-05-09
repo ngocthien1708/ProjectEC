@@ -1,0 +1,76 @@
+﻿@model List<Model.EF.TotalOrder>
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="content_top">
+        <div class="heading">
+            <h3>Đơn hàng của tôi</h3>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="section group">
+        <table class="table table-striped">
+            <thead>
+                <tr style="color:white;background-color:#383838">
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày mua</th>
+                    <th>Sản phẩm</th>
+                    <th>Tổng tiền</th>
+                    <th>Tình trạng</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    int count = 0;
+                    foreach(var item1 in item.ShopOrders)
+                    {
+                        count += item1.OrderDetails.Count();
+                    }
+                    <tr style="font-size:13px;">
+                        <td>@item.ID</td>
+                        <td>@item.CreateDate</td>
+                        @if (item.ShopOrders.Count() > 1)
+                        {
+                            count -= 1;
+                            <td>@item.ShopOrders.First().OrderDetails.First().Product.Name ..và @count sản phẩm khác</td>
+                        }
+
+                        <td>@item.TotalPrice.GetValueOrDefault().ToString("N0")VNĐ</td>
+                        @if (item.Status == 0)
+                        {
+                            <td>Đang xử lý</td>
+                            <td>
+                                <a href="/huy-don-hang-@item.ID">Hủy</a>
+                                |
+                                <a href="/chi-tiet-don-hang/@item.ID">Chi tiết</a>
+                            </td>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <td>Đang vận chuyển</td>
+                            <td>
+                                <a href="/chi-tiet-don-hang/@item.ID">Chi tiết</a>
+                            </td>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <td>Giao hàng thành công</td>
+                            <td>
+                                <a href="/chi-tiet-don-hang/@item.ID">Chi tiết</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>Đã hủy</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+﻿<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/Client/css/style.css" rel="stylesheet" />
+    <link href="~/assets/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <div class="row">
+        <div id="ad-Left" class="col-lg-2"></div>
+        <div class="wrap col-lg-8">
+            <div class="header">
+                <div class="headertop_desc">
+                    @{Html.RenderAction("TopMenu", "Home");}
+                </div>
+                <div class="header_top">
+                    <div class="logo">
+                        <a href="index.html"><img src="~/assets/Client/images/logo.png" alt="" /></a>
+                    </div>
+                    <div class="cart">
+                        <p>
+                            <a style="color:black;" href="/gio-hang">Chào mừng bạn đến với HomeShoppe! <span>Giỏ hàng:</span></a><div id="dd" class="wrapper-dropdown-2">
+                                0 item(s) - $0.00
+                                <ul class="dropdown">
+                                    <li>you have no items in your Shopping cart</li>
+                                </ul>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="header_bottom">
+                    @{Html.RenderAction("MainMenu", "Home"); }
+                    <div class="search_box">
+                        @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                        {
+                            <input type="text" placeholder="Tìm kiếm sản phẩm..." value="@ViewBag.SearchString" name="searchString">
+                            <input type="submit" value="">
+                        }
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                @RenderSection("Slide", required: false)
+            </div>
+            <div class="main">
+                @RenderBody()
+            </div>
+        </div>
+        <div id="ad-right" class="col-lg-2"></div>
+    </div>
+    @{ Html.RenderAction("AdLeftRight", "Home");}
+    <div class="footer">
+        @{ Html.RenderAction("Footer", "Home");}
+    </div>
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+
+    <!--Script-->
+    <script src="~/assets/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/Client/js/move-top.js"></script>
+    <script type="text/javascript" src="~/assets/Client/js/easing.js"></script>
+    <script type="text/javascript">
+        function DropDown(el) {
+            this.dd = el;
+            this.initEvents();
+        }
+        DropDown.prototype = {
+            initEvents: function () {
+                var obj = this;
+
+                obj.dd.on('click', function (event) {
+                    $(this).toggleClass('active');
+                    event.stopPropagation();
+                });
+            }
+        }
+
+        $(function () {
+
+            var dd = new DropDown($('#dd'));
+
+            $(document).click(function () {
+                // all dropdowns
+                $('.wrapper-dropdown-2').removeClass('active');
+            });
+
+        });</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });</script>
+    <script src="~/assets/Admin/js/sb-admin-2.min.js"></script>
+    <script type='text/javascript'>
+        //<![CDATA[
+        function FloatTopDiv() {
+            startLX = ((document.body.clientWidth - MainContentW) / 2) - LeftBannerW - LeftQCjust, startLY = TopQCjust + 80;
+            startRX = ((document.body.clientWidth - MainContentW) / 2) + MainContentW + RightQCjust, startRY = TopQCjust + 80;
+            var d = document;
+            function ml(id) {
+                var el = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                el.sP = function (x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                el.x = startRX;
+                el.y = startRY;
+                return el;
+            }
+            function m2(id) {
+                var e2 = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                e2.sP = function (x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                e2.x = startLX;
+                e2.y = startLY;
+                return e2;
+            }
+            window.stayTopLeft = function () {
+                if (document.documentElement && document.documentElement.scrollTop)
+                    var pY = document.documentElement.scrollTop;
+                else if (document.body)
+                    var pY = document.body.scrollTop;
+                if (document.body.scrollTop > 30) { startLY = 3; startRY = 3; } else { startLY = TopQCjust; startRY = TopQCjust; };
+                ftlObj.y += (pY + startRY - ftlObj.y) / 16;
+                ftlObj.sP(ftlObj.x, ftlObj.y);
+                ftlObj2.y += (pY + startLY - ftlObj2.y) / 16;
+                ftlObj2.sP(ftlObj2.x, ftlObj2.y);
+                setTimeout("stayTopLeft()", 1);
+            }
+            ftlObj = ml("divQCRight");
+            //stayTopLeft();
+            ftlObj2 = m2("divQCLeft");
+            stayTopLeft();
+        }
+        function ShowQCDiv() {
+            var objQCDivRight = document.getElementById("divQCRight");
+            var objQCDivLeft = document.getElementById("divQCLeft");
+            if (document.body.clientWidth < 1000) {
+                objQCDivRight.style.display = "none";
+                objQCDivLeft.style.display = "none";
+            }
+            else {
+                objQCDivRight.style.display = "block";
+                objQCDivLeft.style.display = "block";
+                FloatTopDiv();
+            }
+        }
+        //]]>
+    </script>
+    <script type='text/javascript'>
+        document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 235;RightBannerW = 235;LeftQCjust = 15;RightQCjust = 15;TopQCjust = 175;ShowQCDiv();window.onresize=ShowQCDiv;;<\/script>");
+    </script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
+

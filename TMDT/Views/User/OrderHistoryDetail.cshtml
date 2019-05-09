@@ -1,0 +1,60 @@
+﻿@model List<Model.EF.OrderDetail>
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ListShopOrder = (List<Model.EF.ShopOrder>)ViewBag.ListShop;
+}
+<div class="content">
+    <div class="content_top">
+        <div class="heading">
+            <h3>Chi tiết đơn hàng @ListShopOrder.First().IDTotalOrder</h3>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="section group">
+        <table class="table table-striped">
+            @foreach (var shoporder in ListShopOrder)
+            {
+                <thead>
+                    <tr style="color:white;background-color:#383838">
+                        <td class="align-middle">
+                            <a style="color:white;" href="/san-pham/@shoporder.OrderDetails.First().Product.Account1.ShopName/@shoporder.OrderDetails.First().Product.CreateBy">
+                                Cửa hàng: @shoporder.OrderDetails.First().Product.Account1.ShopName
+                            </a>
+                        </td>
+                        @if (shoporder.Status == 0)
+                        {
+                            <td class="align-middle"><p style="color:white;">Đang xử lý</p></td>
+                            <td><a class="btn btn-danger" href="/lien-he-merchant/@shoporder.OrderDetails.First().Product.CreateBy">Liên hệ</a></td>
+                        }
+                        else
+                        {
+                            <td class="align-middle"><p style="color:white;">Đã giao</p></td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.ShopOrder.IDMerchant == @shoporder.OrderDetails.First().Product.CreateBy)
+                        {
+                            <tr style="font-size:13px;">
+                                <td>@item.Product.Name</td>
+                                <td>@item.Price.GetValueOrDefault(0).ToString("N0")VNĐ</td>
+                                <td>@item.Quantity</td>
+                                <td>@((item.Price * item.Quantity).GetValueOrDefault(0).ToString("N0"))VNĐ</td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
